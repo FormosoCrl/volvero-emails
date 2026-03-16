@@ -9,7 +9,7 @@ import pandas as pd
 
 from src.worker import worker_func
 
-ERROR_FILE = "output_summury_detail/error_145.csv"
+ERROR_FILE = "output_summury_detail/error_145.csv"  # update filename after each retry run
 MAIN_OUTPUT = "output_with_emails.csv"
 SUMMARY_DIR = "output_summury_detail"
 NUM_WORKERS = 10
@@ -114,7 +114,9 @@ def main():
     start_time = time.time()
 
     # index_col=0 restores the original row positions from the main output
+    # index must be int to align with main_df (dtype=str would make it strings)
     error_df = pd.read_csv(ERROR_FILE, dtype=str, encoding='utf-8-sig', index_col=0)
+    error_df.index = error_df.index.astype(int)
     logging.info(f"[INFO] Retrying {len(error_df)} errored rows from {ERROR_FILE}")
     logging.info(f"[INFO] Index range: {error_df.index.min()} – {error_df.index.max()}")
 
