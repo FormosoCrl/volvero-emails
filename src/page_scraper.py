@@ -53,7 +53,7 @@ def scrape_site(browser, url: str, worker_id: int, row_num: int, chunk_size: int
     log = f"[Worker-{worker_id}]"
     logging.info(f"{log} Processing: {url} (row {row_num}/{chunk_size})")
 
-    page = browser.new_page()
+    page = browser.new_page(ignore_https_errors=True)
     try:
         html = scrape_page(page, url, worker_id)
         if html is None:
