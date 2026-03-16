@@ -3,7 +3,8 @@ import multiprocessing
 import threading
 import time
 
-import numpy as np
+import math
+
 import pandas as pd
 
 from src.worker import worker_func
@@ -61,7 +62,8 @@ def main():
     logging.info(f"[INFO] Loaded {len(df)} rows from {INPUT_FILE}")
 
     # Split into chunks
-    chunks = np.array_split(df, NUM_WORKERS)
+    chunk_size = math.ceil(len(df) / NUM_WORKERS)
+    chunks = [df.iloc[i:i + chunk_size] for i in range(0, len(df), chunk_size)]
 
     # Shared queue
     manager = multiprocessing.Manager()

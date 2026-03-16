@@ -1,0 +1,22 @@
+# Conda env (if created locally inside project)
+env/
+.env/
+envs/
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.pytest_cache/
+
+# Output files
+output_with_emails.csv
+output_summury_detail/
+
+# Data files (may contain sensitive info)
+*.xlsx
+*.csv
+
+# OS
+.DS_Store
+Thumbs.db
