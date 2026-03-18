@@ -44,3 +44,35 @@ A per-status breakdown is also written to `output_summury_detail/`:
 ```bash
 conda env update -f environment.yml --prune
 ```
+
+
+
+
+## Snov.io API Extractor (New Feature)
+
+Uses the Snov.io API v2 to find and verify personal emails associated with specific company domains. Includes automatic URL normalization and built-in credit management.
+
+### Configuration
+
+To use the Snov.io extraction script, you must configure your API credentials securely:
+
+```bash
+# 1. Install python-dotenv (if not already in your conda environment)
+pip install python-dotenv
+
+# 2. Duplicate the template file to create your local copy
+cp .env.example .env
+
+# 3. Open the .env file in your editor and insert your CLIENT_ID and CLIENT_SECRET
+```
+> Note: The .env file is git-ignored to prevent credential leaks.
+
+### Usage
+
+```bash
+conda activate volvero-emails
+python snovio.py
+```
+Input: input_data.csv (Automatically detects columns containing "website" or "domain")
+
+Output: Snovio_Final_Results.csv (Contains verified leads with First Name, Last Name, Position, and Email)
